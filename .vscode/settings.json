@@ -3,5 +3,11 @@
     "Lua.workspace.library": [
         "${3rd}/love2d/library"
     ],
-    "Lua.workspace.checkThirdParty": false
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.diagnostics.globals": [
+        "entities"
+    ],
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
+    ]
 }

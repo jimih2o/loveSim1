@@ -7,6 +7,7 @@ end
 require "globals"
 gGame.Sprites = require("sprite")
 gGame.Entities = require("entity")
+gGame.Collision = require("collision")
 
 Cell = require("cell")
 
@@ -15,9 +16,11 @@ function love.load()
     -- test Init sequence: Spawn some random cells
     cells = {}
     for i = 1,100,1 do 
-        cells[i] = Cell.new(tostring(i),
+        cells[i] = Cell.new("cell" .. tostring(i),
                             math.random(0, 600), 
-                            math.random(0, 600))
+                            math.random(0, 600),
+                            math.random(-16, 16),
+                            math.random(-16, 16))
     end
 
 
@@ -26,6 +29,7 @@ end
 
 -- runtime loops
 function love.update(dt)
+    gGame.Collision.HandleCollisions(dt)
     gGame.Entities.Update(dt)
 end
 

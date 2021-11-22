@@ -9,9 +9,36 @@ function Cell.new(name, X, Y, Vx, Vy)
         Vx       = Vx or 0,
         Vy       = Vy or 0,
         radius   = 16,
-        isCircle = true
+        isCircle = true,
+        brain    = nil,
+        timeCol  = 0
     }
     setmetatable(obj, cellMetaTable)
+
+    local brainBlueprint = {
+        NumInnerLayers   = 1,
+        NumNodesPerLayer = 1,
+        NumInputs        = 1,
+        NumOutputs       = 1,
+        EdgeMap = {
+            { -- inner layer 1
+                { -- node 1 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1},
+                --   self
+                    {math.random() * 2 - 1}
+                },
+            },
+            { -- output layer
+                { -- output 1 edges
+                -- bias,                  node1
+                    {math.random() * 2 - 1, math.random() * 2 - 1},
+                },
+            }
+        }
+    }
+
+    obj.brain = gGame.Brain.new(brainBlueprint)
 
     gGame.Entities.Add(name, obj)
     gGame.Sprites.Add(name, obj)
@@ -32,8 +59,22 @@ function Cell.Load(self)
 end
 
 function Cell.Update(self, dt)
+    self.timeCol = self.timeCol + dt
+
+    outputs = self.brain:Think({self:TimeFactor()})
+
+    if outputs[1] >= 0.8 then
+        self.Vx = 200.0
+    elseif outputs[1] <= 0.2 then
+        self.Vx = -200.0
+    end
+
     self.X = self.X + self.Vx * dt
     self.Y = self.Y + self.Vy * dt
+end
+
+function Cell.TimeFactor(self)
+    return 1.0 / (1.0 + self.timeCol)
 end
 
 function Cell.CollidesWidth(self, other, dt)
@@ -42,7 +83,7 @@ function Cell.CollidesWidth(self, other, dt)
         if (self.X - other.X) * (self.X - other.X) + 
            (self.Y - other.Y) * (self.Y - other.Y) <= 
            (self.radius + other.radius) * (self.radius + other.radius) then
-               return true
+                return true
            end
     end
 
@@ -76,6 +117,9 @@ function Cell.HandleCollision(self, other, dt)
 
         other.Vx = magOther * normFactor * vSelfToOther.X 
         other.Vy = magOther * normFactor * vSelfToOther.Y
+
+        self.timeCol = 0
+        if other.timeCol then other.timeCol = 0 end
     end
 end
 
@@ -85,5 +129,6 @@ cellMetaTable.Load            = Cell.Load
 cellMetaTable.Update          = Cell.Update
 cellMetaTable.CollidesWidth   = Cell.CollidesWidth
 cellMetaTable.HandleCollision = Cell.HandleCollision
+cellMetaTable.TimeFactor      = Cell.TimeFactor
 
 return Cell

@@ -5,9 +5,11 @@ end
 
 -- load submodules
 require "globals"
-gGame.Sprites = require("sprite")
-gGame.Entities = require("entity")
+gGame.Sprites   = require("sprite")
+gGame.Entities  = require("entity")
 gGame.Collision = require("collision")
+gGame.Node      = require("node")
+gGame.Brain     = require("brain")
 
 Cell = require("cell")
 

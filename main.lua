@@ -17,9 +17,9 @@ Cell = require("cell")
 function love.load()
     -- test Init sequence: Spawn some random cells
     cells = {}
-    for i = 1,100,1 do 
+    for i = 1,4000,1 do 
         cells[i] = Cell.new("cell" .. tostring(i),
-                            math.random(0, 600), 
+                            math.random(0, 800), 
                             math.random(0, 600),
                             math.random(-16, 16),
                             math.random(-16, 16))

@@ -16,8 +16,8 @@ function Cell.new(name, X, Y, Vx, Vy)
     setmetatable(obj, cellMetaTable)
 
     local brainBlueprint = {
-        NumInnerLayers   = 1,
-        NumNodesPerLayer = 1,
+        NumInnerLayers   = 4,
+        NumNodesPerLayer = 4,
         NumInputs        = 1,
         NumOutputs       = 1,
         EdgeMap = {
@@ -25,14 +25,101 @@ function Cell.new(name, X, Y, Vx, Vy)
                 { -- node 1 edges
                 --   bias,                  input1
                     {math.random() * 2 - 1, math.random() * 2 - 1},
-                --   self
-                    {math.random() * 2 - 1}
+                --   self,                  node2,                 node3,                 node4
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 2 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 3 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 4 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+            },
+            -- inner layer 2
+            {
+                { -- node 1 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                --   self,                  node2,                 node3,                 node4
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 2 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 3 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 4 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+            },
+            -- inner layer 3
+            { 
+                { -- node 1 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                --   self,                  node2,                 node3,                 node4
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 2 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 3 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 4 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+            },
+            -- inner layer 4
+            {
+                { -- node 1 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                --   self,                  node2,                 node3,                 node4
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 2 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 3 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
+                },
+                { -- node 4 edges
+                --   bias,                  input1
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1}
                 },
             },
             { -- output layer
                 { -- output 1 edges
                 -- bias,                  node1
-                    {math.random() * 2 - 1, math.random() * 2 - 1},
+                    {math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1},
                 },
             }
         }

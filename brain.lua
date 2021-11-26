@@ -63,7 +63,7 @@ Brain.Think = function(self, inputs)
         -- construct inputs
         feedForward = {1}
 
-        for _, v in pairs(outputs) do
+        for _, v in ipairs(outputs) do
             table.insert(feedForward, v)
         end
 
@@ -78,7 +78,7 @@ Brain.Think = function(self, inputs)
         for j = 1,self.nodesPerLayer do
             weights = self.edges[i][j][1]
 
-            for _, v in pairs(self.edges[i][j][2]) do
+            for _, v in ipairs(self.edges[i][j][2]) do
                 table.insert(weights, v)
             end
             
@@ -90,10 +90,14 @@ Brain.Think = function(self, inputs)
 
     -- apply final set of nodes for outputs
     current = {}
+
+    -- add bias term
+    table.insert(outputs, 1, 1.0)
+
     for j = 1,self.numOutputs do
-        table.insert(outputs, 1, 1.0)
         current[j] = self.nodes[self.innerLayers + 1][j]:Compute(outputs, self.edges[self.innerLayers + 1][j][1])
     end
+    
     outputs = current
 
     return outputs

@@ -15,7 +15,6 @@ gGame.Tile        = require("tile")
 gGame.Map         = require("map")
 gGame.Camera      = require("camera")
 gGame.World       = love.physics.newWorld(0, 0, true)
-gGame.OnCollision = {}
 
 Cell = require("cell")
 
@@ -38,15 +37,11 @@ function postSolve(a, b, contact)
     bData = b:getUserData()
 
     if aData and aData.NotifyCollision then
-        for cb in ipairs(gGame.OnCollision) do
-            aData:NotifyCollision(bData, contact)
-        end
+        aData:NotifyCollision(bData, contact)
     end
     
     if bData and bData.NotifyCollision then
-        for cb in ipairs(gGame.OnCollision) do
-            bData:NotifyCollision(aData, contact)
-        end
+        bData:NotifyCollision(aData, contact)
     end
 end
 

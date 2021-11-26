@@ -54,7 +54,7 @@ end
 function love.load()
     Camera.Compute()
 
-    gGame.World:setCallbacks(beginContext, endContact, preSolve, postSolve)
+    gGame.World:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
     -- test Init sequence: Spawn some random cells
     map = gGame.Map.new("maps/demo")

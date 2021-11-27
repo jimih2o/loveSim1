@@ -1,23 +1,19 @@
 entities = {}
 entities.ents = {}
 
-entities.Add = function(name, ent)
+entities.Add = function(ent)
     if not ent.Update then
         print("Error, entity " + name + " has no Update property.")
         return nil
     end
 
-    entities.ents[name] = ent 
+    entities.ents[#entities.ents + 1] = ent 
     return ent
 end
 
-entities.Get = function(name)
-    return entities.ents[name]
-end
-
 entities.Update = function(dt)
-    for key, value in pairs(entities.ents) do 
-        value:Update(dt)
+    for _, ent in ipairs(entities.ents) do 
+        ent:Update(dt)
     end
 end
 

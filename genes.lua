@@ -15,19 +15,19 @@ Genes.new = function (sequenceLength)
 end
 
 Genes.FromString = function(sequence)
-    local gene = Genes.new(sequence.len())
+    local gene = Genes.new(sequence:len())
 
     for i = 1,gene.len do
-        gene.code[i] = sequence[i]
+        gene.code[i] = sequence:sub(i,i)
     end
 
     return gene
 end
 
 Genes.GenerateRandomSequence = function(count)
-    local code = ""
+    local code = {}
     for i = 1,count do
-        code = code .. string.char(math.random(65, 90))
+        code[i] = string.char(math.random(65, 90))
     end
     return code
 end
@@ -78,13 +78,34 @@ Genes.Mate = function(self, other)
 end
 
 Genes.tostring = function(self) 
-    return self.code 
+    local str = ""
+    
+    for _,c in ipairs(self.code) do
+        str = str .. c
+    end
+
+    return str
 end
 
-genesMeta.__index = genesMeta
+Genes.Code = function(self)
+    return self.code
+end
+
+Genes.Length = function(self)
+    return self.len
+end
+
+Genes.len = function(self)
+    return self.len
+end
+
+genesMeta.__index    = genesMeta
 genesMeta.Mutate     = Genes.Mutate
 genesMeta.Clone      = Genes.Clone
 genesMeta.Mate       = Genes.Mate
+genesMeta.Code       = Genes.Code
+genesMeta.Length     = Genes.Length
+genesMeta.len        = Genes.len
 genesMeta.__tostring = Genes.tostring
 
 return Genes

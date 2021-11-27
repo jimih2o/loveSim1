@@ -15,6 +15,7 @@ gGame.Tile        = require("tile")
 gGame.Map         = require("map")
 gGame.Camera      = require("camera")
 gGame.Genes       = require("genes")
+gGame.Controller  = require("controller")
 gGame.LifeForm    = require("lifeform")
 gGame.World       = love.physics.newWorld(0, 0, true)
 
@@ -56,6 +57,12 @@ function love.load()
     -- test Init sequence: Spawn some random cells
     map = gGame.Map.new("maps/demo")
     map:Load()
+
+    lfTest = gGame.LifeForm.new({
+        useCode = true,
+        geneticCode = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        position = {X = 32, Y = 32}
+    })
 
     cells = {}
     for i = 1,200,1 do 

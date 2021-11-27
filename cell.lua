@@ -66,7 +66,7 @@ function Cell.new(name, X, Y, Vx, Vy)
     obj.fixture:setUserData(obj) -- allow context to be passed through
     obj.body:setLinearVelocity(Vx or 0, Vy or 0)
 
-    gGame.Entities.Add(name, obj)
+    gGame.Entities.Add(obj)
     gGame.Sprites.Add(obj)
 
     return obj

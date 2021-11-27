@@ -14,6 +14,8 @@ gGame.Brain       = require("brain")
 gGame.Tile        = require("tile")
 gGame.Map         = require("map")
 gGame.Camera      = require("camera")
+gGame.Genes       = require("genes")
+gGame.LifeForm    = require("lifeform")
 gGame.World       = love.physics.newWorld(0, 0, true)
 
 Cell = require("cell")
